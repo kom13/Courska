@@ -37,11 +37,10 @@ namespace Курсовая
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ListDisk = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.FilePathTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.ListDisks = new System.Windows.Forms.ComboBox();
+            this.ListDisk = new System.Windows.Forms.ComboBox();
             imageList = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,9 +62,9 @@ namespace Курсовая
             this.columnHeader3,
             this.columnHeader4});
             this.ListFiles.HideSelection = false;
-            this.ListFiles.Location = new System.Drawing.Point(217, 80);
+            this.ListFiles.Location = new System.Drawing.Point(12, 80);
             this.ListFiles.Name = "ListFiles";
-            this.ListFiles.Size = new System.Drawing.Size(571, 358);
+            this.ListFiles.Size = new System.Drawing.Size(776, 358);
             this.ListFiles.SmallImageList = imageList;
             this.ListFiles.TabIndex = 0;
             this.ListFiles.UseCompatibleStateImageBehavior = false;
@@ -91,15 +90,7 @@ namespace Курсовая
             // columnHeader4
             // 
             this.columnHeader4.Text = "размер";
-            this.columnHeader4.Width = 69;
-            // 
-            // ListDisk
-            // 
-            this.ListDisk.Location = new System.Drawing.Point(12, 80);
-            this.ListDisk.Name = "ListDisk";
-            this.ListDisk.Size = new System.Drawing.Size(199, 358);
-            this.ListDisk.TabIndex = 1;
-            this.ListDisk.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ListDisk_AfterSelect);
+            this.columnHeader4.Width = 136;
             // 
             // toolStrip1
             // 
@@ -110,9 +101,9 @@ namespace Курсовая
             this.FilePathTextBox,
             this.toolStripButton1});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.toolStrip1.Location = new System.Drawing.Point(217, 29);
+            this.toolStrip1.Location = new System.Drawing.Point(83, 26);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(532, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(721, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -121,7 +112,7 @@ namespace Курсовая
             this.FilePathTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.FilePathTextBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FilePathTextBox.Name = "FilePathTextBox";
-            this.FilePathTextBox.Size = new System.Drawing.Size(500, 27);
+            this.FilePathTextBox.Size = new System.Drawing.Size(650, 27);
             this.FilePathTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FilePathTextBox_KeyDown);
             // 
             // toolStripButton1
@@ -136,22 +127,22 @@ namespace Курсовая
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // ListDisks
+            // ListDisk
             // 
-            this.ListDisks.FormattingEnabled = true;
-            this.ListDisks.Location = new System.Drawing.Point(12, 29);
-            this.ListDisks.Name = "ListDisks";
-            this.ListDisks.Size = new System.Drawing.Size(88, 24);
-            this.ListDisks.TabIndex = 4;
+            this.ListDisk.FormattingEnabled = true;
+            this.ListDisk.Location = new System.Drawing.Point(12, 29);
+            this.ListDisk.Name = "ListDisk";
+            this.ListDisk.Size = new System.Drawing.Size(58, 24);
+            this.ListDisk.TabIndex = 4;
+            this.ListDisk.SelectedIndexChanged += new System.EventHandler(this.ListDisk_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ListDisks);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ListDisk);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ListFiles);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -165,7 +156,6 @@ namespace Курсовая
 
         #endregion
         private System.Windows.Forms.ListView ListFiles;
-        private System.Windows.Forms.TreeView ListDisk;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
@@ -173,7 +163,7 @@ namespace Курсовая
         private System.Windows.Forms.ToolStripTextBox FilePathTextBox;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         public System.Windows.Forms.ColumnHeader namr;
-        private System.Windows.Forms.ComboBox ListDisks;
+        private System.Windows.Forms.ComboBox ListDisk;
     }
 }
 

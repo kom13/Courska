@@ -8,8 +8,6 @@ namespace Курсовая
     public partial class Form1 : Form
     {
         private string FilePath = @"C:\";
-        private bool isInitializeTvwDirectory = true;
-
 
         public Form1()
         {
@@ -20,9 +18,10 @@ namespace Курсовая
         {
             ShowFileList(FilePath);
 
-            OutputDiskAndPath();
+            DiskLists();
         }
 
+        //вывод файлов
         public void ShowFileList(string FilePath)
         {
             try
@@ -33,6 +32,8 @@ namespace Курсовая
 
                 //Очистить ListFiles
                 ListFiles.Items.Clear();
+
+                string[] sizeletters = new string[] { "bytes", "KB", "MB", "GB"};
 
                 //Список всех папок
                 foreach (DirectoryInfo dirInfo in dirs)
@@ -51,7 +52,19 @@ namespace Курсовая
                     item.Tag = fileInfo.FullName;
                     item.SubItems.Add(fileInfo.LastWriteTime.ToString());
                     item.SubItems.Add(fileInfo.Extension + "");
-                    item.SubItems.Add("");
+
+                    if (fileInfo.Length < (1000 * 1000))
+                    {
+                        item.SubItems.Add($"{fileInfo.Length / 1000} KB");
+                    }
+                    else if (fileInfo.Length < (1000 * 1000 * 1000))
+                    {
+                        item.SubItems.Add($"{fileInfo.Length / (1000 * 1000)} MB");
+                    }
+                    else
+                    {
+                        item.SubItems.Add($"{fileInfo.Length / (1000 * 1000 * 1000)} GB");
+                    }
                 }
             }
             catch (Exception e)
@@ -63,38 +76,14 @@ namespace Курсовая
             FilePathTextBox.Text = FilePath;
         }
 
-        private void OutputDiskAndPath()
+        //вывод дисков в бокс
+        public void DiskLists()
         {
-            DriveInfo[] driveInformation = DriveInfo.GetDrives();
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
 
-            foreach (DriveInfo info in driveInformation)
+            foreach (DriveInfo item in allDrives)
             {
-                TreeNode driveNode;
-
-                switch (info.DriveType)
-                {
-                    //жесткий диск
-                    case DriveType.Fixed:
-
-                        //имя диска
-                        driveNode = ListDisk.Nodes.Add("Локальный диск (" + info.Name.Split('\\')[0] + ")");
-
-                        //путь
-                        driveNode.Tag = info.Name;
-
-                        break;
-
-                    //съемный диск
-                    case DriveType.Removable:
-
-                        //имя диска
-                        driveNode = ListDisk.Nodes.Add("Отображаемое имя (" + info.Name.Split('\\')[0] + ")");
-
-                        //путь
-                        driveNode.Tag = info.Name;
-
-                        break;
-                }
+                ListDisk.Items.Add(item.Name);
             }
         }
 
@@ -118,24 +107,7 @@ namespace Курсовая
             }
         }
 
-        private void ListDisk_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (isInitializeTvwDirectory)
-            {
-                FilePath = @"C:\";
-                FilePathTextBox.Text = FilePath;
-
-                //Список "недавно открывавшихся" файлов отображается в правой форме.
-                ShowFileList(FilePath);
-
-                isInitializeTvwDirectory = false;
-            }
-            else
-            {
-                ShowFileList(e.Node.Tag.ToString());
-            }
-        }
-
+        //открытие файла/папки
         private void ListFiles_ItemActivate(object sender, EventArgs e)
         {
             string path = ListFiles.SelectedItems[0].Tag.ToString();
@@ -161,9 +133,21 @@ namespace Курсовая
             }
         }
 
+        //обновить данные
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            FilePath = FilePathTextBox.Text;
             ShowFileList(FilePath);
+        }
+
+        //Вывод файлов по диску
+        private void ListDisk_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string path = Convert.ToString((sender as ComboBox).SelectedItem);
+
+            FilePathTextBox.Text = path;
+
+            ShowFileList(path);
         }
     }
 }
